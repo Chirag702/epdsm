@@ -52,7 +52,7 @@ public class Ticket {
     @Column(name = "status", length = 1, nullable = false, columnDefinition = "char(1) default 'N'")
     private String status;
 
-    @Column(name = "assigned_on", length = 2, nullable = false)
+    @Column(name = "assigned_on", length = 2)
     private String assignedOn;
 
     @Column(name = "assigned_date")
