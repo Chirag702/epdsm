@@ -4,12 +4,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import com.onefactor.epdsm.dto.TicketUserDTO;
 import com.onefactor.epdsm.tickets.entity.Ticket;
 import com.onefactor.epdsm.tickets.service.TicketService;
 
 import java.util.List;
-
 @CrossOrigin(allowedHeaders = "*")
+
 @RestController
 @RequestMapping("/api/tickets")
 public class TicketController {
@@ -27,10 +28,14 @@ public class TicketController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Ticket> getTicketById(@PathVariable Integer id) {
-        return ticketService.getTicketById(id)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
+    public ResponseEntity<TicketUserDTO> getTicketById(@PathVariable Integer id) {
+    	  TicketUserDTO ticketUserDTO = ticketService.getTicketById(id);
+
+          if (ticketUserDTO != null) {
+              return ResponseEntity.ok(ticketUserDTO);
+          } else {
+              return ResponseEntity.notFound().build();
+          }
     }
 
     @PostMapping

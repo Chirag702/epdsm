@@ -3,6 +3,7 @@ package com.onefactor.epdsm.tickets.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.onefactor.epdsm.dto.TicketUserDTO;
 import com.onefactor.epdsm.tickets.entity.Ticket;
 import com.onefactor.epdsm.tickets.repository.TicketRepository;
 import com.onefactor.epdsm.tickets.service.TicketService;
@@ -26,8 +27,8 @@ public class TicketServiceImpl implements TicketService {
     }
 
     @Override
-    public Optional<Ticket> getTicketById(Integer id) {
-        return ticketRepository.findById(id);
+    public TicketUserDTO getTicketById(Integer id) {
+        return ticketRepository.getTicketById(id);
     }
 
     @Override
