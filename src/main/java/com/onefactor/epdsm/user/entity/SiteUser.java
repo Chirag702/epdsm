@@ -91,4 +91,9 @@ public class SiteUser {
 
     @Column(name = "user_social_session_data", columnDefinition = "text", nullable = false)
     private String userSocialSessionData;
+    
+    @Column(name="department", columnDefinition = "text", nullable=false)
+    private long departmentId;
+    
+    
 }
