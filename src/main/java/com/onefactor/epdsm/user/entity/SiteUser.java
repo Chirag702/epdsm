@@ -38,8 +38,6 @@ public class SiteUser {
 	@Column(name = "contact_owner_name", length = 100, nullable = false)
 	private String contactOwnerName;
 
-	@JsonProperty // This annotation will allow password to be included in input
-	@JsonIgnore //
 	@Column(name = "pass", length = 32, nullable = false)
 	private String password;
 
