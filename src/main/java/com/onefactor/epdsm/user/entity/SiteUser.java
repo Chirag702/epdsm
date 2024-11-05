@@ -30,6 +30,16 @@ public class SiteUser {
     @Column(name = "email", length = 100, nullable = false, unique = true, columnDefinition = "char(100) default ''")
     private String email;
 
+    @Column(name = "secondary_email", length = 100,  columnDefinition = "char(100) default ''")
+    private String secondaryEmail;
+
+    
+    @Column(name = "contact_owner_id", nullable=false)
+    private Integer contactOwnerId;
+    
+    @Column(name = "contact_owner_name", length = 100, nullable=false)
+    private Integer contactOwnerName;
+    
     @JsonProperty  // This annotation will allow password to be included in input
     @JsonIgnore  // 
     @Column(name = "pass", length = 32, nullable = false)
@@ -95,5 +105,7 @@ public class SiteUser {
     @Column(name="department", columnDefinition = "text", nullable=false)
     private long departmentId;
     
+    @Column(name="department_name", columnDefinition = "text", nullable=false)
+    private String departmentName;
     
 }
