@@ -45,6 +45,8 @@ public class TicketServiceImpl implements TicketService {
 		newTicket.setIsOpenUsingEmail("N");
 		newTicket.setIsPublic("N");
 		newTicket.setIsPaidTicket("N");
+		newTicket.setIsUserSeenLastReply("N");
+		
  		return ticketRepository.save(newTicket);
 	}
 
