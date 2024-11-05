@@ -41,7 +41,7 @@ public class TicketServiceImpl implements TicketService {
 		Ticket newTicket = ticket;
 		newTicket.setTicketTrackId(tid.generateCustomString());
 		newTicket.setTicketUser(id);
-		newTicket.setAssignedOn("AA");
+		newTicket.setAssignedOn("");
 		return ticketRepository.save(newTicket);
 	}
 
