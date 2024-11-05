@@ -21,8 +21,7 @@ public class SiteUserServiceImpl implements SiteUserService {
 		Timestamp currentTimestamp = new Timestamp(System.currentTimeMillis());
 		user.setJoinDate(currentTimestamp);
 		// You might want to handle password hashing here before saving
-		user.setPassword(null); // Ignore password when saving
-		return siteUserRepository.save(user);
+ 		return siteUserRepository.save(user);
 	}
 
 	@Override
