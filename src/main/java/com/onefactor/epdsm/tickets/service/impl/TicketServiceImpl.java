@@ -38,10 +38,11 @@ public class TicketServiceImpl implements TicketService {
 	@Override
 	public Ticket createTicket(Ticket ticket) {
 		String id = "2";
-		Ticket newTicket = new Ticket();
+		Ticket newTicket = ticket;
 		newTicket.setTicketTrackId(tid.generateCustomString());
 		newTicket.setTicketUser(id);
-		return ticketRepository.save(ticket);
+		newTicket.setAssignedOn("AA");
+		return ticketRepository.save(newTicket);
 	}
 
 	@Override
