@@ -42,7 +42,10 @@ public class TicketServiceImpl implements TicketService {
 		newTicket.setTicketTrackId(tid.generateCustomString());
 		newTicket.setTicketUser(id);
 		newTicket.setAssignedOn("");
-		return ticketRepository.save(newTicket);
+		newTicket.setIsOpenUsingEmail("N");
+		newTicket.setIsPublic("N");
+		newTicket.setIsPaidTicket("N");
+ 		return ticketRepository.save(newTicket);
 	}
 
 	@Override
