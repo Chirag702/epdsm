@@ -1,6 +1,7 @@
 package com.onefactor.epdsm.tickets.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Service;
 
 import com.onefactor.epdsm.dto.TicketUserDTO;
@@ -9,8 +10,14 @@ import com.onefactor.epdsm.tickets.entity.Ticket;
 import com.onefactor.epdsm.tickets.repository.TicketRepository;
 import com.onefactor.epdsm.tickets.service.TicketService;
 
+ import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
+import java.math.BigDecimal;
+import java.sql.Timestamp;
+import java.time.Instant;
 
 @Service
 public class TicketServiceImpl implements TicketService {
@@ -37,18 +44,41 @@ public class TicketServiceImpl implements TicketService {
 
 	@Override
 	public Ticket createTicket(Ticket ticket) {
-		String id = "2";
-		Ticket newTicket = ticket;
-		newTicket.setTicketTrackId(tid.generateCustomString());
-		newTicket.setTicketUser(id);
-		newTicket.setAssignedOn("");
-		newTicket.setIsOpenUsingEmail("N");
-		newTicket.setIsPublic("N");
-		newTicket.setIsPaidTicket("N");
-		newTicket.setIsUserSeenLastReply("N");
-		
- 		return ticketRepository.save(newTicket);
+	    // Set the current timestamp for openedTime
+	    Timestamp currentTimestamp = new Timestamp(System.currentTimeMillis());
+
+	    // Initialize a new ticket with default values
+	    Ticket newTicket = new Ticket();
+	    newTicket.setTicketTrackId(tid.generateCustomString());
+	    newTicket.setTicketUser(ticket.getTicketUser() != null ? ticket.getTicketUser() : "2");
+	    newTicket.setAssignedOn(ticket.getAssignedOn() != null ? ticket.getAssignedOn() : "");
+	    newTicket.setIsOpenUsingEmail(ticket.getIsOpenUsingEmail() != null ? ticket.getIsOpenUsingEmail() : "N");
+	    newTicket.setIsPublic(ticket.getIsPublic() != null ? ticket.getIsPublic() : "N");
+	    newTicket.setIsPaidTicket(ticket.getIsPaidTicket() != null ? ticket.getIsPaidTicket() : "N");
+	    newTicket.setIsUserSeenLastReply(ticket.getIsUserSeenLastReply() != null ? ticket.getIsUserSeenLastReply() : "N");
+	    newTicket.setLastRepliedBy(ticket.getLastRepliedBy() != null ? ticket.getLastRepliedBy() : "");
+	    newTicket.setLastRepliedByType(ticket.getLastRepliedByType() != null ? ticket.getLastRepliedByType() : "");
+	    newTicket.setOpenedTime(ticket.getOpenedTime() != null ? ticket.getOpenedTime() : currentTimestamp);
+	    newTicket.setReOpenBy(ticket.getReOpenBy() != null ? ticket.getReOpenBy() : "");
+	    newTicket.setReOpenByType(ticket.getReOpenByType() != null ? ticket.getReOpenByType() : "");
+	    newTicket.setReplyCounter(ticket.getReplyCounter() != null ? ticket.getReplyCounter() : 0);
+
+	    // Set main fields or defaults
+	    newTicket.setCatId(ticket.getCatId() != null ? ticket.getCatId() : "0");
+	    newTicket.setTitle(ticket.getTitle() != null ? ticket.getTitle() : "");
+	    newTicket.setTicketBody(ticket.getTicketBody() != null ? ticket.getTicketBody() : "");
+	    newTicket.setPriority(ticket.getPriority() != null ? ticket.getPriority() : "L");
+	    newTicket.setStatus(ticket.getStatus() != null ? ticket.getStatus() : "N");
+	    
+	    // Set additional fields with defaults
+	    newTicket.setUserType(ticket.getUserType() != null ? ticket.getUserType() : "U");
+	    newTicket.setAssignedDate(ticket.getAssignedDate() != null ? ticket.getAssignedDate() : null);
+	    newTicket.setLastReplyTime(ticket.getLastReplyTime() != null ? ticket.getLastReplyTime() : null);
+	    newTicket.setTicketRating(ticket.getTicketRating() != null ? ticket.getTicketRating() : BigDecimal.ZERO);
+
+	    return ticketRepository.save(newTicket);
 	}
+
 
 	@Override
 	public Optional<Ticket> updateTicket(Integer id, Ticket ticketDetails) {
@@ -76,7 +106,7 @@ public class TicketServiceImpl implements TicketService {
 			ticket.setIsPaidTicket(ticketDetails.getIsPaidTicket());
 			ticket.setReplyCounter(ticketDetails.getReplyCounter());
 			ticket.setIsUserSeenLastReply(ticketDetails.getIsUserSeenLastReply());
-
+			
 			return ticketRepository.save(ticket);
 		});
 	}
