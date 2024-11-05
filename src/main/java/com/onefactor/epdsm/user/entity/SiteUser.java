@@ -6,6 +6,9 @@ import lombok.Data;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 @Data
 @Entity
 @Table(name = "site_user")
@@ -27,6 +30,8 @@ public class SiteUser {
     @Column(name = "email", length = 100, nullable = false, unique = true, columnDefinition = "char(100) default ''")
     private String email;
 
+    @JsonProperty  // This annotation will allow password to be included in input
+    @JsonIgnore  // 
     @Column(name = "pass", length = 32, nullable = false)
     private String password;
 
