@@ -41,7 +41,7 @@ public class SiteUserServiceImpl implements SiteUserService {
 
 	@Override
 	public Optional<SiteUser> findByUsername(String username) {
-		return Optional.ofNullable(siteUserRepository.findByUsername(username));
+		return siteUserRepository.findByUsername(username);
 	}
 
 	@Override

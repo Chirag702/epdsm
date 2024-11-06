@@ -1,9 +1,12 @@
 package com.onefactor.epdsm.user.entity;
 
 import jakarta.persistence.*;
+
 import lombok.Data;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
+import java.util.HashSet;
+import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -38,7 +41,7 @@ public class SiteUser {
 	@Column(name = "contact_owner_name", length = 100, nullable = false)
 	private String contactOwnerName;
 
-	@Column(name = "pass", length = 32, nullable = false)
+	@Column(name = "pass",  nullable = false)
 	private String password;
 
 	@Column(name = "is_verified_email", length = 1, nullable = false, columnDefinition = "char(1) default 'N'")
@@ -67,5 +70,9 @@ public class SiteUser {
 
 	@Column(name = "department_name", columnDefinition = "text", nullable = false)
 	private String departmentName;
+
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
+	private Set<Role> roles = new HashSet<>();
 
 }

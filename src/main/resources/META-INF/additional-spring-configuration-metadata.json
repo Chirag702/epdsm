@@ -1,0 +1,19 @@
+{"properties": [
+  {
+    "name": "epdsm.app.jwtSecret",
+    "type": "java.lang.String",
+    "description": "A description for 'epdsm.app.jwtSecret'"
+  },
+  {
+    "name": "epdsm.app.jwtExpirationMs",
+    "type": "java.lang.String",
+    "description": "A description for 'epdsm.app.jwtExpirationMs'"
+  }
+]} "description": "A description for 'epdsm.app.jwtSecret'"
+  },
+  {
+    "name": "epdsm.app.jwtExpirationMs",
+    "type": "java.lang.String",
+    "description": "A description for 'epdsm.app.jwtExpirationMs'"
+  }
+]}
